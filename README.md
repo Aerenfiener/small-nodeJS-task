@@ -12,7 +12,7 @@
 В магазине покупатель выбрал 4 товара со следующими ценами.
 В результате сформировалась корзина,
 
-```json
+```js
 const selectedCart = [
    { price: 20 },
    { price: 45 },
@@ -29,7 +29,7 @@ const selectedCart = [
 ### Цель
 Рассчитать общую цену для каждого типа валюты, получив объект вида:
 
-```json
+```js
 const totalCartPrice = { 
    rubles: number,
    euros: number,
