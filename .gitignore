@@ -1,0 +1,19 @@
+# Build
+/dist
+
+# Node modules
+/node_modules
+
+# IDEs and editors
+/.idea
+*.sublime-workspace
+
+# misc
+npm-debug.log
+
+# System Files
+**/.DS_Store
+Thumbs.db
+
+# npm
+package-lock.json
