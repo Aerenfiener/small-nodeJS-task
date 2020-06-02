@@ -16,17 +16,14 @@ export class Basket {
 	// All prices in basket are in dollars
 	// and currencyList is contains numbers with main currency dollar
 	getSumOfBasket(basket: BasketItem[], currencyList: CurrencyModel): TotalBasketPrice {
-		const sum = basket.reduce(
-			({price: prevPrice}: BasketItem, {price: currPrice}: BasketItem) =>
-				({price: prevPrice + currPrice})
-		    ).price;
+		const sum = basket.reduce((prev: number, curr: BasketItem) => prev += curr.price, 0);
 
 		return {
-			rubles: parseFloat((sum * currencyList[CurrencyEnum.RUB]).toFixed(2)),
-			euros: parseFloat((sum * currencyList[CurrencyEnum.EUR]).toFixed(2)),
-			USDollars: parseFloat((sum * currencyList[CurrencyEnum.USD]).toFixed(2)),
-			pounds: parseFloat((sum * currencyList[CurrencyEnum.GBP]).toFixed(2)),
-			yens: parseFloat((sum * currencyList[CurrencyEnum.JPY]).toFixed(2))
+			rubles: this.cropCurrency(sum * currencyList[CurrencyEnum.RUB]),
+			euros: this.cropCurrency(sum * currencyList[CurrencyEnum.EUR]),
+			USDollars: this.cropCurrency(sum * currencyList[CurrencyEnum.USD]),
+			pounds: this.cropCurrency(sum * currencyList[CurrencyEnum.GBP]),
+			yens: this.cropCurrency(sum * currencyList[CurrencyEnum.JPY])
 		};
 	}
 
@@ -38,5 +35,9 @@ export class Basket {
 			.replace('}', '');
 
 		return `<div> ${resultObject} </div>`;
+	}
+
+	private cropCurrency(currency: number): number {
+		return parseFloat(currency.toFixed(2));
 	}
 }
